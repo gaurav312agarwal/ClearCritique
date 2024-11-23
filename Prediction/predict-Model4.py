@@ -16,14 +16,13 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 # Load Model 1
 model_1 = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=2)
-model_1.load_state_dict(torch.load('Prediction/DL_model_1.pth', map_location=device))
+model_1.load_state_dict(torch.load('Prediction/DL_model_1.pth', map_location=device, weights_only=True))
 model_1.to(device)
 
 # Load Model 3
 model_3 = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=2)
-model_3.load_state_dict(torch.load('Prediction/DL_model_3.pth', map_location=device))
+model_3.load_state_dict(torch.load('Prediction/DL_model_3.pth', map_location=device, weights_only=True))
 model_3.to(device)
-
 
 # Prediction function
 def predict_review(model1, model3, tokenizer, device, review, max_len=160):
@@ -56,7 +55,6 @@ def predict_review(model1, model3, tokenizer, device, review, max_len=160):
         confidence, label = avg_pred.max(dim=1)
         return label.item(), confidence.item() * 100
 
-
 # Streamlit App
 def main():
     # Page configuration
@@ -72,7 +70,7 @@ def main():
     # Add an image at the top
     try:
         image = Image.open("Prediction/review.png")  # Updated to use the uploaded file
-        st.image(image, caption="Analyze Reviews Seamlessly", use_column_width=True)
+        st.image(image, caption="Analyze Reviews Seamlessly", use_container_width=True)
     except FileNotFoundError:
         st.warning("Image not found. Please ensure 'image.png' is in the app directory.")
 
@@ -110,7 +108,6 @@ def main():
     # Footer
     st.markdown("---")
     st.markdown("**Built with  ❤️ using BERT .**")
-
 
 if __name__ == "__main__":
     main()
