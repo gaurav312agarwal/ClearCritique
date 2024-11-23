@@ -16,12 +16,12 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 
 # Load Model 1
 model_1 = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=2)
-model_1.load_state_dict(torch.load('DL_model_1.pth', map_location=device))
+model_1.load_state_dict(torch.load('Prediction/DL_model_1.pth', map_location=device))
 model_1.to(device)
 
 # Load Model 3
 model_3 = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=2)
-model_3.load_state_dict(torch.load('DL_model_3.pth', map_location=device))
+model_3.load_state_dict(torch.load('Prediction/DL_model_3.pth', map_location=device))
 model_3.to(device)
 
 
@@ -71,10 +71,10 @@ def main():
 
     # Add an image at the top
     try:
-        image = Image.open("review.png")  # Replace with an actual image file in your directory
+        image = Image.open("image.png")  # Updated to use the uploaded file
         st.image(image, caption="Analyze Reviews Seamlessly", use_column_width=True)
     except FileNotFoundError:
-        st.warning("Image not found. Please ensure 'review_image.jpg' is in the app directory.")
+        st.warning("Image not found. Please ensure 'image.png' is in the app directory.")
 
     # Input section
     st.subheader("Enter Review")
