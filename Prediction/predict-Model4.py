@@ -71,7 +71,7 @@ def main():
 
     # Add an image at the top
     try:
-        image = Image.open("Prediction/image.png")  # Updated to use the uploaded file
+        image = Image.open("Prediction/review.png")  # Updated to use the uploaded file
         st.image(image, caption="Analyze Reviews Seamlessly", use_column_width=True)
     except FileNotFoundError:
         st.warning("Image not found. Please ensure 'image.png' is in the app directory.")
